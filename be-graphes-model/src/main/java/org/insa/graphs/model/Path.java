@@ -177,7 +177,7 @@ public class Path {
 
     /**
      * Get the number of <b>nodes</b> in this path.
-     * 
+     * ngth of this arc, in meters.
      * @return Number of nodes in this path.
      */
     public int size() {
@@ -210,11 +210,14 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
+     *  Need to be implemented.
      */
     public float getLength() {
-        // TODO:
-        return 0;
+        float lengthPath=0.0f;
+        for (int i=0; i<arcs.size(); i++) {
+            lengthPath += arcs.get(i).getLength();
+        }
+        return lengthPath;
     }
 
     /**
