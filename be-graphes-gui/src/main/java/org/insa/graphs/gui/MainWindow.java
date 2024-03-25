@@ -1,4 +1,4 @@
-/**Test */
+/**Test 2*/
 
 package org.insa.graphs.gui;
 
