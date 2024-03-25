@@ -235,12 +235,13 @@ public class Path {
      * on every arc.
      * 
      * @return Minimum travel time to travel this path (in seconds).
-     * 
-     * @deprecated Need to be implemented.
      */
     public double getMinimumTravelTime() {
-        // TODO:
-        return 0;
+        float minimumTime=0.0f;
+        for (int i=0; i<arcs.size(); i++) {
+            minimumTime += arcs.get(i).getMinimumTravelTime();
+        }
+        return minimumTime;
     }
 
 }
