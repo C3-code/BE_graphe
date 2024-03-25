@@ -1,3 +1,5 @@
+/**Test */
+
 package org.insa.graphs.gui;
 
 import java.awt.BorderLayout;
