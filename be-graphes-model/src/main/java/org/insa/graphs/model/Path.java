@@ -29,13 +29,30 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
-     * @deprecated Need to be implemented.
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        if (nodes.size() < 2) {
+            throw new IllegalArgumentException("Not enough nodes to have a path");
+        }
+        else {
+            for (int i=0; i < (nodes.size()-1); i++) {
+                Node noeud = nodes.get(i);      
+                double shortestTime = Double.POSITIVE_INFINITY;
+                Arc fastestArc = null;
+                for (Arc a:noeud.getSuccessors()) {
+                    if ((a.getMinimumTravelTime() < shortestTime) && (a.getDestination() == nodes.get(i+1))){
+                        shortestTime=a.getMinimumTravelTime();
+                        fastestArc = a;
+                    } 
+                }
+                if (fastestArc==null)  {
+                    throw new IllegalArgumentException("Nodes in the list are not connected in the graph.");
+                }
+                arcs.add(fastestArc);      
+            }
+        }
         return new Path(graph, arcs);
     }
 
@@ -50,13 +67,32 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        if (nodes.size() < 2) {
+            throw new IllegalArgumentException("Not enough nodes to have a path");
+        }
+        else {
+            for (int i=0; i < (nodes.size()-1); i++) {
+                Node noeud = nodes.get(i);
+                float shortestLength = Float.POSITIVE_INFINITY;
+                Arc shortestArc = null;
+                for (Arc a:noeud.getSuccessors()) {
+                    if ((a.getLength() < shortestLength) && (a.getDestination() == nodes.get(i+1))){
+                        shortestLength=a.getLength();
+                        shortestArc = a;
+                    } 
+                }
+                if (shortestArc==null)  {
+                    throw new IllegalArgumentException("Nodes in the list are not connected in the graph.");
+                }
+                arcs.add(shortestArc);
+                
+            }
+        }
         return new Path(graph, arcs);
     }
 
@@ -65,7 +101,9 @@ public class Path {
      * 
      * @param paths Array of paths to concatenate.
      * 
-     * @return Concatenated path.
+     * @return Concatenated path.testCreateShortestPathFromNodesException() {
+        Path.createShortestPathFromNodes(graph, Arrays.asList(new Node[] { nodes[1], nodes[0] }));
+    }
      * 
      * @throws IllegalArgumentException if the paths cannot be concatenated (IDs of
      *         map do not match, or the end of a path is not the beginning of the
