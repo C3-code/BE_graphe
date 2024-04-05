@@ -181,8 +181,8 @@ public class Path {
      * @return Number of nodes in this path.
      */
     public int size() {
-        return isEmpty() ? 0 : 1 + this.arcs.size();
-    }
+        return isEmpty() ? 0 : 1 + this.arcs.size(); //if the container is empty return 0
+    }                                               //otherwise return 1+ size of arcs collection 
 
     /**
      * Check if this path is valid.
@@ -200,16 +200,21 @@ public class Path {
      */
     public boolean isValid() {
         boolean validPath = true;
-        if (arcs.get(0).getOrigin() == this.getOrigin()) {
-            for (int i=1; i<arcs.size(); i++) {
-                validPath = (arcs.get(i-1).getDestination() == arcs.get(i).getOrigin());
+        if (!this.isEmpty()) { //if empty on sort de la boucle et chemin valide (condition 1)
+            if (arcs.size()!=0) { //si on a un noeud c'est OK (condition 2)
+                if (arcs.get(0).getOrigin() == this.getOrigin()) { //on teste propriété succession (condition 3)
+                    int i=1;
+                    while (i<arcs.size() && validPath) { //des qu'on a un arc faux on arrete
+                        validPath = (arcs.get(i-1).getDestination() == arcs.get(i).getOrigin());
+                        i+=1;
+                    }
+                }
+                else {
+                    validPath = false;
+                }  
             }
         }
-        else {
-            validPath = false;
-        }
-
-        return this.isEmpty()|| (arcs.size()==0) || validPath;
+        return validPath;
     }
 
     /**
