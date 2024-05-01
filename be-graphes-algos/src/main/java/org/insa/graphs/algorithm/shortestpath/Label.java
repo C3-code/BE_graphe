@@ -10,7 +10,7 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
 
     /** Getters des elements */
     public Node getSommetCourant(Node noeud) {
-        return get
+        return 0;
     }
 
     //retourner le cout du label 
