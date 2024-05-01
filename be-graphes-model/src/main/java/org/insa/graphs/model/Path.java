@@ -33,13 +33,10 @@ public class Path {
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        if (nodes.size() == 0){
-            return new Path(graph);
-        } 
-        else if (nodes.size() == 1){
-            return new Path(graph, nodes.get(0));
-        } 
-        else{ 
+        if (nodes.size() < 2) {
+            throw new IllegalArgumentException("Not enough nodes to have a path");
+        }
+        else {
             for (int i=0; i < (nodes.size()-1); i++) {
                 Node noeud = nodes.get(i);      
                 double shortestTime = Double.POSITIVE_INFINITY;
@@ -75,12 +72,9 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        if (nodes.size() == 0){
-            return new Path(graph);
-        } 
-        else if (nodes.size() == 1){
-            return new Path(graph, nodes.get(0));
-        } 
+        if (nodes.size() < 2) {
+            throw new IllegalArgumentException("Not enough nodes to have a path");
+        }
         else {
             for (int i=0; i < nodes.size()-1; i++) {
                 Node noeud = nodes.get(i);
