@@ -33,10 +33,7 @@ public class Path {
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        if (nodes.size() < 2) {
-            throw new IllegalArgumentException("Not enough nodes to have a path");
-        }
-        else {
+        if (nodes.size()>1) {
             for (int i=0; i < (nodes.size()-1); i++) {
                 Node noeud = nodes.get(i);      
                 double shortestTime = Double.POSITIVE_INFINITY;
@@ -72,11 +69,9 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        if (nodes.size() < 2) {
-            throw new IllegalArgumentException("Not enough nodes to have a path");
-        }
-        else {
-            for (int i=0; i < (nodes.size()-1); i++) {
+        
+    
+            for (int i=0; i < nodes.size(); i++) {
                 Node noeud = nodes.get(i);
                 float shortestLength = Float.POSITIVE_INFINITY;
                 Arc shortestArc = null;
@@ -92,7 +87,6 @@ public class Path {
                 arcs.add(shortestArc);
                 
             }
-        }
         return new Path(graph, arcs);
     }
 
@@ -239,7 +233,8 @@ public class Path {
     public boolean isValid() {
         boolean validPath = true;
         if (!this.isEmpty()) { //if empty on sort de la boucle et chemin valide (condition 1)
-            if (arcs.size()!=0) { //si on a un noeud c'est OK (condition 2)
+            if (arcs.size()!=0) { //si on a un noeud         path = Path.createFastestPathFromNodes(graph, Arrays.asList(new Node[] { nodes[1] }));
+            //c'est OK (condition 2)
                 if (arcs.get(0).getOrigin() == this.getOrigin()) { //on teste propriété succession (condition 3)
                     int i=1;
                     while (i<arcs.size() && validPath) { //des qu'on a un arc faux on arrete
