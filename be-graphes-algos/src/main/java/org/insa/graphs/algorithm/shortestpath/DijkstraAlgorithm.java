@@ -76,6 +76,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
         //solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
         //pour recreeer le plus court chemin, parcourir le tableau de labels à l'envers en suivant les paramètres "pere" de chacun jusqu'à arriver au départ  
+        //pour creeer un chemin il faut un graphe et une liste d'arc => creer une liste d'arc dès le debut 
+        
 
         
         //Stocker les labels des noeuds 
