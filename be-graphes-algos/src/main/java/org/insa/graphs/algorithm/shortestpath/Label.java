@@ -5,13 +5,13 @@ import org.insa.graphs.model.Node;
 public class Label implements Comparable<Label>{ //les elements donnes doivent etre comparables 
     private Node sommetCourant;
     private boolean marque;
-    private float coutRealise;
+    private double coutRealise;
     private Node pere;
 
     public Label(Node noeud)  {
         this.sommetCourant = noeud;
         this.marque = false;
-        this.coutRealise = Float.POSITIVE_INFINITY;
+        this.coutRealise = Double.POSITIVE_INFINITY; //type avec une majuscule => c'est un objet et pas un type 
         this.pere = null;
     }
 
@@ -21,7 +21,7 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
     }
 
     //retourner le cout du label 
-    public float getCost() {
+    public double getCost() {
         return coutRealise;
     }
     
@@ -57,7 +57,7 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
     }
 
     //modifier le cout du label
-    public void setCost(float cout) {
+    public void setCost(double cout) {
         this.coutRealise = cout;
     }
     
