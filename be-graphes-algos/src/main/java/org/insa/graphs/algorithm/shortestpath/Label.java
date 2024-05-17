@@ -1,12 +1,12 @@
 package org.insa.graphs.algorithm.shortestpath;
-
+import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Node;
 
 public class Label implements Comparable<Label>{ //les elements donnes doivent etre comparables 
     private Node sommetCourant;
     private boolean marque;
     private double coutRealise;
-    private Node pere;
+    private Arc pere;
 
     public Label(Node noeud)  {
         this.sommetCourant = noeud;
@@ -29,7 +29,7 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
         return marque;
     }
 
-    public Node getPere() {
+    public Arc getPere() {
         return pere;
     }
 
@@ -65,7 +65,7 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
         this.marque = true;
     }
 
-    public void setPere(Node father) {
+    public void setPere(Arc father) {
         this.pere=father;
     }
 }
