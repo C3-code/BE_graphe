@@ -21,7 +21,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     protected ShortestPathSolution doRun() {
         final ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;
-        // TODO:
+        
         //plus court chemin d'une orgine vers tous les autres sommets
         //algo dijkstra considère les noeuds au cout le plus faible parmi ceux qui n'ont pas été marqué
 

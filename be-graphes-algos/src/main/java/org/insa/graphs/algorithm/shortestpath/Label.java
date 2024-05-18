@@ -33,13 +33,18 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
         return pere;
     }
 
+    //Recuperer le cout total
+    public double getTotalCost() {
+        return coutRealise;
+    }
+
     public int compareTo(Label autre) {
         // this.coutRealise et variable.coutrealise  
         int resultat;
-        if (this.getCost()<autre.getCost()) {
+        if (this.getTotalCost()<autre.getTotalCost()) {
             resultat = -1;
         }
-        else if (this.getCost()==autre.getCost()){
+        else if (this.getTotalCost()==autre.getTotalCost()){
             resultat = 0;
         }
         else {
@@ -47,8 +52,6 @@ public class Label implements Comparable<Label>{ //les elements donnes doivent e
         }
         return resultat;
     }
-
-
 
     /** Setters des elements */
     //modifier le sommet courant
