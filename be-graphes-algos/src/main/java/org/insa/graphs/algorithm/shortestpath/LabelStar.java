@@ -1,11 +1,11 @@
 package org.insa.graphs.algorithm.shortestpath;
 import org.insa.graphs.model.Node;
 
-public class LabelStars extends Label{ //cette classe herite de la classe Label 
+public class LabelStar extends Label{ //cette classe herite de la classe Label 
     private double coutDestination; //on rajoute une nouvelle info de coût
     
 
-    public LabelStars(Node noeud, Node destination)  {
+    public LabelStar(Node noeud, Node destination)  {
         super(noeud);
 
         //Calcul de la distance à vol d'oiseau entre le noeud et la destination (methode calcul detaillee dans Point.java)
