@@ -44,7 +44,7 @@ public class shortestPathTest {
         GraphReader readerNonRoad = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapNonRoadName))));
         // Lisez le graphe.
         graphRoad = readerRoad.read();
-        graphNonRoad = readerRoad.read();
+        graphNonRoad = readerNonRoad.read();
 
     }
 
