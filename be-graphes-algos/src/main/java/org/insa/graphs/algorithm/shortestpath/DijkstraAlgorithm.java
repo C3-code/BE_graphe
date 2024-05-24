@@ -64,6 +64,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                     if (tabLabels[arc.getDestination().getId()]==null){
                         labelSuccesseur = new Label (noeudSuccesseur);
                         tabLabels[arc.getDestination().getId()] = labelSuccesseur;
+                        notifyNodeReached(noeudSuccesseur);//afficher a l'ecran que ce noeud la a ete atteint
                     }
                     else {
                         labelSuccesseur = tabLabels[arc.getDestination().getId()];

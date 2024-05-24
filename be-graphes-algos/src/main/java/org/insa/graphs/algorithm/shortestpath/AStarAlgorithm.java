@@ -30,7 +30,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
         Node noeudDestination = data.getDestination();
 
         //Recuperer le label du premier noeud
-        LabelStar debut = new LabelStar(data.getOrigin(), noeudDestination);
+        LabelStar debut = new LabelStar(data.getOrigin(), noeudDestination,data);
         debut.setCost(0);
 
         //Declarer un binary heap pour stocker les labels des noeuds du graphe (de type label)
@@ -64,15 +64,17 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
                     LabelStar labelSuccesseur;
     
                     if (tabLabelStar[arc.getDestination().getId()]==null){ // si le label successeur n'est pas dans la table, on le cree 
-                        labelSuccesseur = new LabelStar(noeudSuccesseur, noeudDestination);
+                        labelSuccesseur = new LabelStar(noeudSuccesseur, noeudDestination,data);
                         tabLabelStar[arc.getDestination().getId()] = labelSuccesseur;
+
+                        notifyNodeReached(noeudSuccesseur);//afficher a l'ecran que ce noeud la a ete atteint
                     }
                     else {
                         labelSuccesseur = tabLabelStar[arc.getDestination().getId()];
                     }
     
                     //Calculer le nouveau cout potentiel pour aller jusqu au successeur
-                    LabelStar successeurActualise = new LabelStar(noeudSuccesseur, noeudDestination);
+                    LabelStar successeurActualise = new LabelStar(noeudSuccesseur, noeudDestination,data);
                     double nouveauCout = labelCourant.getCost() + data.getCost(arc);
                     successeurActualise.setCost(nouveauCout); //mise a jour du cout 
 
