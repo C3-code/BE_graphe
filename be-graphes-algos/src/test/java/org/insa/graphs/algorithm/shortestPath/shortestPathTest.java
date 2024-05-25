@@ -103,43 +103,6 @@ public class shortestPathTest {
      */
     private void testScenarioB(Graph graph, Node origin, Node destination) {
         
-            ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
-        
-            // Initialize variables
-            List<Arc> arcs = new ArrayList<>();
-            boolean debut = true;
-            int compteurIteration = 0;
-        
-            // Determine the shortest path using Dijkstra algorithm
-            DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(data);
-            ShortestPathSolution solutionDijkstra = dijkstra.run();
-            if (solutionDijkstra.isFeasible()) {
-                Path pathDijkstra = solutionDijkstra.getPath();
-                arcs = pathDijkstra.getArcs();
-            } else {
-                System.out.println("Pas de chemin existant.");
-                return; // Exit early if no feasible path
-            }
-        
-            // Iterate over each arc of the shortest path
-            while (compteurIteration < arcs.size()) {
-                Arc arcCourant = arcs.get(compteurIteration);
-                ShortestPathData dataBis = new ShortestPathData(graph, arcCourant.getOrigin(), arcCourant.getDestination(), ArcInspectorFactory.getAllFilters().get(0));
-                DijkstraAlgorithm dijkstraBis = new DijkstraAlgorithm(dataBis);
-                ShortestPathSolution sousChemin = dijkstraBis.run();
-        
-                if (sousChemin.isFeasible()) {
-                    Path sousCheminPath = sousChemin.getPath();
-                    assertEquals(arcCourant.getLength(), sousCheminPath.getLength(), 1e-3);
-                    assertEquals(arcCourant.getMinimumTravelTime(), sousCheminPath.getMinimumTravelTime(), 1e-3);
-                    System.out.println("Les tests ont marches");
-                }
-                compteurIteration++;
-            }
-        
-        
-
-        /* 
         //boucle realisee uniquement lors de la premiere iteration, permet de determiner le plus court chemin avec Dijkstra 
         if (debut) { 
             ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
@@ -172,7 +135,7 @@ public class shortestPathTest {
             testScenarioB(graph, origin,destination);
         }
         compteurIteration =0; //on remet le compteur a 0 pour de prochains tests
-        */
+        
     }
    
 
