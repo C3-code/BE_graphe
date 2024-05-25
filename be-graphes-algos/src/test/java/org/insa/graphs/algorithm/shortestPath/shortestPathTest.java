@@ -42,15 +42,15 @@ public class shortestPathTest {
     public static void initAll() throws Exception {
         // Changez le chemin du fichier de carte pour les tests
         final String mapInsa = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-        final String mapMidiPyrenees = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
+        final String mapHauteGaronne = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
 
         // Créez un lecteur des graphes.
         BinaryGraphReader readerInsa = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapInsa))));
-        BinaryGraphReader readerMidiPyrenees = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapMidiPyrenees))));
+        BinaryGraphReader readerHauteGaronne = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapHauteGaronne))));
 
         // Lisez le graphe.
         graphShort = readerInsa.read();
-        graphLarge = readerMidiPyrenees.read();
+        graphLarge = readerHauteGaronne.read();
     }
 
     
@@ -129,10 +129,11 @@ public class shortestPathTest {
                 Path sousCheminPath = sousChemin.getPath();
                 assertEquals(arcCourant.getLength(), sousCheminPath.getLength(), 1e-3);
                 assertEquals(arcCourant.getMinimumTravelTime(), sousCheminPath.getMinimumTravelTime(), 1e-3);
-                System.out.println("Les tests ont marches");
+                
             }
             compteurIteration++;
             testScenarioB(graph, origin,destination);
+            System.out.println("Les tests ont marches");
         }
         compteurIteration =0; //on remet le compteur a 0 pour de prochains tests
         
@@ -186,8 +187,8 @@ public class shortestPathTest {
     //Tests ScenarioB - Validite sans Bellman
     @Test
     public void testB() {
-        //testScenarioB(graphLarge, graphLarge.getNodes().get(607), graphLarge.getNodes().get(167));
-        testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
+        testScenarioB(graphLarge, graphLarge.getNodes().get(607), graphLarge.getNodes().get(167));
+        //testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
     }
  
      
