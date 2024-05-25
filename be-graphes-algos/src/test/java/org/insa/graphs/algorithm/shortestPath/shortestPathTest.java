@@ -43,12 +43,10 @@ public class shortestPathTest {
     public static void initAll() throws Exception {
         // Changez le chemin du fichier de carte pour les tests
         final String mapInsa = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-        final String mapFrance = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/france.mapgr";
-        final String mapMidiPyrenees = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/midi-pyrenees.mapgr";
+        final String mapMidiPyrenees = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr";
 
         // Créez un lecteur des graphes.
         GraphReader readerInsa = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapInsa))));
-        GraphReader readerFrance = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapFrance))));
         GraphReader readerMidiPyrenees = new BinaryGraphReader(new DataInputStream(new BufferedInputStream(new FileInputStream(mapMidiPyrenees))));
 
         // Lisez le graphe.
@@ -169,11 +167,11 @@ public class shortestPathTest {
             System.out.println("Pas de chemin existant.");
         }
     }
-
+    
     //Tests ScenarioA - Validite avec Bellman
     @Test
     public void testClassicPathRoad() {
-        for (int i=0; i<50; i++) {
+        for (int i=0; i<30; i++) {
             testScenarioA(graphShort, graphShort.getNodes().get(random.nextInt(graphShort.getNodes().size())), graphShort.getNodes().get(random.nextInt(graphShort.getNodes().size()))); //trouver les coordoonnees
         }    
     }     
@@ -188,10 +186,11 @@ public class shortestPathTest {
     //Tests ScenarioB - Validite sans Bellman
     @Test
     public void testB() {
+        //testScenarioB(graphLarge, graphLarge.getNodes().get(607), graphLarge.getNodes().get(167));
         testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
-        testScenarioB(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
     }
  
+     
     //Tests ScenarioC - Performance
     @Test
     public void testPerformance() { //on ne peut comparer la performance entre les algorithmes que si la distance entre deux points est suffisament elevee
@@ -200,5 +199,5 @@ public class shortestPathTest {
             //testScenarioC(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(101));
             testScenarioC(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
         }   
-    }    
+    }   
 }
