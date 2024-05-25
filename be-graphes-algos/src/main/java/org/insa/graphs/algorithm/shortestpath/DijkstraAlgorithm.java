@@ -20,7 +20,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         ShortestPathSolution solution = null;
         
         //plus court chemin d'une orgine vers tous les autres sommets
-        //algo dijkstra considère les noeuds au cout le plus faible parmi ceux qui n'ont pas été marqué
 
         Graph graph = data.getGraph(); //recuperer le graphe
         int tailleGraphe = graph.size();
@@ -45,10 +44,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             System.out.println(labelCourant.getCost());
 
             Node noeudCourant = labelCourant.getSommetCourant();
-
-           /*  if (labelCourant.getPere() != null) { //si ce n'est pas  le premier noeud
-                chemin.insert(labelCourant.getPere().successors)
-            }*/
 
             notifyNodeMarked(noeudCourant); // afficher sur l'ecran que le noeud a ete marque  
             if (noeudCourant == data.getDestination()) { // si il sagit de la destination, on sort de la boucle 
@@ -111,16 +106,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             // Create the final solution.
             solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
-        }
-
-
-    
-        //pour recreeer le plus court chemin, parcourir le tableau de labels à l'envers en suivant les paramètres "pere" de chacun jusqu'à arriver au départ  
-        //pour creeer un chemin il faut un graphe et une liste d'arc => creer une liste d'arc dès le debut 
-        
-
-
-        
+        }    
         //Stocker les labels des noeuds 
         return solution;
     }

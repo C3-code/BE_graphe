@@ -3,7 +3,7 @@ import org.insa.graphs.model.Node;
 import org.insa.graphs.algorithm.AbstractInputData;
 
 public class LabelStar extends Label{ //cette classe herite de la classe Label 
-    private double coutDestination; //on rajoute une nouvelle info de coût
+    private double coutDestination; //on rajoute une nouvelle info de coût estime a la destination
     
 
     public LabelStar(Node noeud, Node destination, ShortestPathData data)  {
