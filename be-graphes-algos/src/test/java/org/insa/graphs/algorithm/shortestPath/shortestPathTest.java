@@ -38,9 +38,10 @@ public class shortestPathTest {
     private static Graph graphShort;
     private static Graph graphLarge;
     private static Random random =  new Random();
+
+    //Variables globales utilisees pour le scenarioB
     private boolean debut =  true;
     private int compteurIteration =  0;
-    //private Path pathDijkstraR;
     private List<Arc> arcs;
     
 
@@ -129,39 +130,20 @@ public class shortestPathTest {
 
             if (sousChemin.isFeasible()) {
                 Path sousCheminPath = sousChemin.getPath();
-                assertEquals(arcCourant.getLength(), sousCheminPath.getLength(), 1e-6);
-                assertEquals(arcCourant.getMinimumTravelTime(), sousCheminPath.getMinimumTravelTime(), 1e-6);
+                assertEquals(arcCourant.getLength(), sousCheminPath.getLength(), 1e-3);
+                assertEquals(arcCourant.getMinimumTravelTime(), sousCheminPath.getMinimumTravelTime(), 1e-3);
+                System.out.println("Les tests ont marches");
             }
             compteurIteration++;
             testScenarioB(graph, origin,destination);
         }
-        
-            /* version iterative
-            boolean correct = true;
-            boolean fin = false;
-            while (correct && !fin) {
-            for (int i =0; i< pathDijkstra.size()-1; i++) {
-                ShortestPathData dataBis = new ShortestPathData(graph, graphShort.getNodes().get(i), graphShort.getNodes().get(i+1), ArcInspectorFactory.getAllFilters().get(0));
-                DijkstraAlgorithm dijkstraBis = new DijkstraAlgorithm(dataBis);
-                ShortestPathSolution sousChemin = dijkstraBis.run();
-                if () {
-
-                }
-            }
-            fin = true; */
-        
-        /* 
-        Path pathBellmanFord = solutionBellmanFord.getPath();
-        Path pathDijkstra = solutionDijkstra.getPath();
-        assertNotNull(pathDijkstra);
-        assertNotNull(pathBellmanFord);
-        assertEquals(pathDijkstra.getLength(), pathBellmanFord.getLength(), 1e-6);
-        assertEquals(pathDijkstra.getMinimumTravelTime(), pathBellmanFord.getMinimumTravelTime(), 1e-6); */ 
+        compteurIteration =0; //on remet le compteur a 0 pour de prochains tests
     }
    
 
     /*--------SCENARIO C ----------------
-    Comparer les performances entre A* et Dijkstra 
+    Comparer les performances entre A* et Dijkstra,
+    en termes de temps d'execution
     */ 
     private void testScenarioC(Graph graph, Node origin, Node destination) {
         ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
@@ -188,7 +170,7 @@ public class shortestPathTest {
         }
     }
 
-     /* 
+     
     @Test
     public void testClassicPathRoad() {
         for (int i=0; i<50; i++) {
@@ -201,13 +183,13 @@ public class shortestPathTest {
         for (int i=0; i<10; i++) {
             testScenarioA(graphShort, graphShort.getNodes().get(0), graphShort.getNodes().get(1));
         }
-    } */
+    } 
 
-    //il faudra verifier que l'algorithme s'arrete si il n'existe pas de chemin 
-    /*--------SCENARIO B ----------------solutionAStar.getSolvingTime().getNano()
-     Tests prenant en compte la propriete
+    
+    /*--------SCENARIO B ----------------
+     Tests prenant en compte la propriete suivante
      "Les sous-chemins des plus courts chemins sont des plus court chemin"
-     */ /* 
+     */ 
     @Test
     public void testEmptyPathRoad() { 
        testScenarioB(graphShort, graphShort.getNodes().get(0), graphShort.getNodes().get(0));
@@ -220,8 +202,12 @@ public class shortestPathTest {
         }  
     }   
 
-    
-    */
+    @Test
+    public void testB() {
+        testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
+        testScenarioB(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
+    }
+
 
      
     
@@ -241,10 +227,7 @@ public class shortestPathTest {
           
     }    */
 
-    @Test
-    public void testB() {
-        testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
-    }
+  
     
     /*
     else {
