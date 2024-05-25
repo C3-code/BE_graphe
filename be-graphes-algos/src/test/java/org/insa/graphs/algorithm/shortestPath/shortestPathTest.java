@@ -170,7 +170,7 @@ public class shortestPathTest {
         }
     }
 
-    //Tests ScenarioA
+    //Tests ScenarioA - Validite avec Bellman
     @Test
     public void testClassicPathRoad() {
         for (int i=0; i<50; i++) {
@@ -185,66 +185,20 @@ public class shortestPathTest {
         }
     } 
 
-    //Tests ScenarioB
+    //Tests ScenarioB - Validite sans Bellman
     @Test
     public void testB() {
         testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
         testScenarioB(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
     }
-
-    
-    //comparaison en temps d'execution             testScenarioC(graphLarge, graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size())), graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size()))); 
-    
+ 
+    //Tests ScenarioC - Performance
     @Test
     public void testPerformance() { //on ne peut comparer la performance entre les algorithmes que si la distance entre deux points est suffisament elevee
         for (int i=0; i<30; i++) {
             testScenarioC(graphShort, graphShort.getNodes().get(1), graphShort.getNodes().get(1000));
-            testScenarioC(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
+            //testScenarioC(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(101));
             testScenarioC(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
-        }
-            //testScenarioC(graphLarge, graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size())), graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size()))); 
-            //testScenarioC(graphShort, graphShort.getNodes().get(random.nextInt(graphShort.getNodes().size())), graphShort.getNodes().get(random.nextInt(graphShort.getNodes().size())));
-            //testScenarioC(graphShort, graphShort.getNodes().get(1000), graphShort.getNodes().get(1100));
-          
+        }   
     }    
-    
-    /* 
-    @Test
-    public void testEmptyPathRoad() { 
-       testScenarioB(graphShort, graphShort.getNodes().get(0), graphShort.getNodes().get(0));
-    } 
-
-    @Test
-    public void testClassicLargePath() {
-        for (int i=0; i < 2; i++) {
-            testScenarioB(graphLarge, graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size())), graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size()))); //trouver les coordoonnees
-        }  
-    }   /* */
-
-    
-
-
-     
-    
-
-
-  
-    
-    /*
-    else {
-            //assertEquals(1,0);
-            System.out.println("fffffff");
-        }
-    @Test
-    public void testShortPathRoad() {
-        Node[] nodes = graphShort.getNodes().toArray(new Node[0]);
-        Arc a2b = nodes[0].getSuccessors().get(0);
-        Arc b2c = nodes[1].getSuccessors().get(0);
-        Arc c2d_1 = nodes[2].getSuccessors().get(0);
-        testScenario(graphShort, new Path(graphShort, Arrays.asList(a2b, b2c, c2d_1)), nodes[0], nodes[3], true);
-    }
-
-
-
-    */
 }
