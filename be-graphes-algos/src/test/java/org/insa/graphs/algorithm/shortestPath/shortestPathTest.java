@@ -28,12 +28,6 @@ import org.junit.Test;
 
 
 public class shortestPathTest {
-    /*Capsule temporelle: il faut implémenter les tests avec junits avec @before class et @Test (s'inspirer des tests
-    realises dans la classe PathTEST) en 
-    1) decrivant l'environnement => creation de graphes et de maps que  l'on veut tester 
-        pour cela, reprendre le fonctionnement utilise dans le fichier Launch.java (tout sauf la dernière ligne
-        qui permet de faire l'affichage. Car nous n'avons pas besoin de l'affichage)
-    2) faire les test avec la fonction assert() issue de la bib junit */
 
     private static Graph graphShort;
     private static Graph graphLarge;
@@ -45,8 +39,7 @@ public class shortestPathTest {
     private List<Arc> arcs;
     
 
-
-    @BeforeClass
+    @BeforeClass 
     public static void initAll() throws Exception {
         // Changez le chemin du fichier de carte pour les tests
         final String mapInsa = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
@@ -61,13 +54,13 @@ public class shortestPathTest {
         // Lisez le graphe.
         graphShort = readerInsa.read();
         graphLarge = readerMidiPyrenees.read();
-        
     }
 
     
-    /*--------SCENARIO A ----------------
+    /*-------------SCENARIO A ------------------
     Tester la validite de Dijsktra et A* en comparaison avec l'algorithme de Bellman-Ford
-    Prend en compte la non-validité d'un chemin (s'il n'existe pas de chemin entre l'origine et la destination, on vérifie bien que A* et Dijkstra sont !isFeasible()).
+    Prend en compte la non-validité d'un chemin (s'il n'existe pas de chemin entre l'origine et 
+    la destination, on vérifie bien que A* et Dijkstra sont !isFeasible()).
     Fonctionne si l'on change le filtre des arcs (toutes les routes, tests en temps ou en distance)
      */
     private void testScenarioA(Graph graph, Node origin, Node destination) {
@@ -106,8 +99,14 @@ public class shortestPathTest {
         }
     }
 
+
+     /*--------SCENARIO B ----------------
+     Tests prenant en compte la propriete suivante
+     "Les sous-chemins des plus courts chemins sont des plus court chemin"
+     */
     private void testScenarioB(Graph graph, Node origin, Node destination) {
 
+        //boucle realisee uniquement lors de la premiere iteration, permet de determiner le plus court chemin avec Dijkstra 
         if (debut) { 
             ShortestPathData data = new ShortestPathData(graph, origin, destination, ArcInspectorFactory.getAllFilters().get(0));
             //On lance l'algorithme de Dijkstra sur une grande carte
@@ -119,7 +118,8 @@ public class shortestPathTest {
             }
             debut =false;            
         }
-        //On parcourt le plus court chemin trouve point par point 
+
+        //On parcourt le plus court chemin trouve precedemment point par point 
         //Pour chaque portion de solution, on relance un algorithme de dijkstra pour verifier qu'on trouve le meme PCC
         //on utilise la reccursivite
         if (compteurIteration < arcs.size()) {
@@ -170,7 +170,7 @@ public class shortestPathTest {
         }
     }
 
-     
+    //Tests ScenarioA
     @Test
     public void testClassicPathRoad() {
         for (int i=0; i<50; i++) {
@@ -185,33 +185,14 @@ public class shortestPathTest {
         }
     } 
 
-    
-    /*--------SCENARIO B ----------------
-     Tests prenant en compte la propriete suivante
-     "Les sous-chemins des plus courts chemins sont des plus court chemin"
-     */ 
-    @Test
-    public void testEmptyPathRoad() { 
-       testScenarioB(graphShort, graphShort.getNodes().get(0), graphShort.getNodes().get(0));
-    } 
-
-    @Test
-    public void testClassicLargePath() {
-        for (int i=0; i < 2; i++) {
-            testScenarioB(graphLarge, graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size())), graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size()))); //trouver les coordoonnees
-        }  
-    }   
-
+    //Tests ScenarioB
     @Test
     public void testB() {
         testScenarioB(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(167));
         testScenarioB(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
     }
 
-
-     
     
-
     //comparaison en temps d'execution             testScenarioC(graphLarge, graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size())), graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size()))); 
     /* 
     @Test
@@ -226,6 +207,26 @@ public class shortestPathTest {
             //testScenarioC(graphShort, graphShort.getNodes().get(1000), graphShort.getNodes().get(1100));
           
     }    */
+    
+    /* 
+    @Test
+    public void testEmptyPathRoad() { 
+       testScenarioB(graphShort, graphShort.getNodes().get(0), graphShort.getNodes().get(0));
+    } 
+
+    @Test
+    public void testClassicLargePath() {
+        for (int i=0; i < 2; i++) {
+            testScenarioB(graphLarge, graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size())), graphLarge.getNodes().get(random.nextInt(graphLarge.getNodes().size()))); //trouver les coordoonnees
+        }  
+    }   /* */
+
+    
+
+
+     
+    
+
 
   
     
