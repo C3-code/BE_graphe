@@ -196,7 +196,6 @@ public class shortestPathTest {
     public void testPerformance() { //on ne peut comparer la performance entre les algorithmes que si la distance entre deux points est suffisament elevee
         for (int i=0; i<30; i++) {
             testScenarioC(graphShort, graphShort.getNodes().get(1), graphShort.getNodes().get(1000));
-            //testScenarioC(graphShort, graphShort.getNodes().get(607), graphShort.getNodes().get(101));
             testScenarioC(graphShort, graphShort.getNodes().get(461), graphShort.getNodes().get(1026));
         }   
     }   
